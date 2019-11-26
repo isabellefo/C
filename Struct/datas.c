@@ -8,22 +8,32 @@ typedef struct{
 }dma;
 
 dma fim_evento(dma datainicio, int duracao);
+int diferenca_datas(dma datainicio, dma datafim);
 
 int main(void) {
   dma x;
   dma y;
+  dma z;
   int duracao;
-
+  int diferenca;
+  
+  printf("Data 1:\n");
   scanf("%d/%d/%d", &x.dia,&x.mes,&x.ano);
+  printf("Duração do evento em dias:\n");
   scanf("%d", &duracao);
+  y = fim_evento(x, duracao);
+  printf("%d/%d/%d\n", y.dia,y.mes,y.ano);
 
-  y = fim_evento(x,duracao);
-
-  printf("%d/%d/%d", y.dia,y.mes,y.ano);
+  printf("Data 2:\n");
+  scanf("%d/%d/%d", &z.dia,&z.mes,&z.ano);
+  diferenca = diferenca_datas(x,z);
+  printf("Diferença de %d dias entre a data 1 e data 2\n", diferenca);
 
   return 0;
 }
 
+
+//Devolve a data do fim do evento em relação a data inicial e a duração do evento
 dma fim_evento(dma datainicio, int duracao){
   dma datafim;
   
@@ -53,4 +63,14 @@ dma fim_evento(dma datainicio, int duracao){
   datafim.ano = datafim.ano + (duracao/360);
 
   return datafim;
+}
+
+
+//Calcula o número de dias que decorreram entre as duas datas
+int diferenca_datas(dma datainicio, dma datafim){
+  int diferenca;
+
+  diferenca = abs((datainicio.dia+(datainicio.mes*30)+(datainicio.ano*360))-(datafim.dia+(datafim.mes*30)+(datafim.ano*360)));
+
+  return diferenca;
 }

@@ -7,15 +7,24 @@ typedef struct{
   int ano;
 }dma;
 
+typedef struct{
+  int horas;
+  int minutos;
+
+}hm;
+
 dma fim_evento(dma datainicio, int duracao);
 int diferenca_datas(dma datainicio, dma datafim);
+hm calcular_minutos(int minutos);
 
 int main(void) {
   dma x;
   dma y;
   dma z;
+  hm a;
   int duracao;
   int diferenca;
+  int minutos;
   
   printf("Data 1:\n");
   scanf("%d/%d/%d", &x.dia,&x.mes,&x.ano);
@@ -28,6 +37,12 @@ int main(void) {
   scanf("%d/%d/%d", &z.dia,&z.mes,&z.ano);
   diferenca = diferenca_datas(x,z);
   printf("Diferença de %d dias entre a data 1 e data 2\n", diferenca);
+
+
+  printf("Digite um intervalo de tempo em minutos:\n");
+  scanf("%d", &minutos);
+  a = calcular_minutos(minutos);
+  printf("%d horas e %d minutos\n", a.horas, a.minutos);
 
   return 0;
 }
@@ -73,4 +88,12 @@ int diferenca_datas(dma datainicio, dma datafim){
   diferenca = abs((datainicio.dia+(datainicio.mes*30)+(datainicio.ano*360))-(datafim.dia+(datafim.mes*30)+(datafim.ano*360)));
 
   return diferenca;
+}
+
+hm calcular_minutos(int minutos){
+  hm a;
+  a.horas = minutos/60;
+  a.minutos = minutos%60;
+
+  return a;
 }
